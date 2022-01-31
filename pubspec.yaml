@@ -12,8 +12,11 @@ dependencies:
   hive: ^2.0.5
   get_it: ^7.2.0
   hive_flutter: ^1.1.0
-  flutter_riverpod: ^0.14.0
   freezed_annotation: ^0.14.1
+
+  # state management
+  flutter_hooks: ^0.18.2
+  hooks_riverpod: ^1.0.3
 
 dev_dependencies:
   flutter_test:

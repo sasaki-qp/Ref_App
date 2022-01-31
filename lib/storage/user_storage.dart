@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:hive_demo_app/model/user.dart';
 import 'package:hive_demo_app/storage/adapter/user_storage_type.dart';
 
 class UserStorage {
@@ -12,13 +13,11 @@ class UserStorage {
     userBox.delete(user.uid);
   }
 
-  UserStorageType? getUser({required UserStorageType user}) {
+  UserStorageType? getUser({required User user}) {
     return userBox.get(user.uid);
   }
 
   List<int> getAllUserIds() {
-    return userBox.values.toList().map<int>((elm) {
-      return elm.uid;
-    }).toList();
+    return userBox.values.toList().map<int>((elm) => elm.uid).toList();
   }
 }

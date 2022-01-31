@@ -13,17 +13,12 @@ class UserStorageType {
   @HiveField(2)
   String name;
 
-  @HiveField(3)
-  bool? isMarried;
-
-  @HiveField(4)
-  bool isCheck;
+  // @HiveField(3)
+  // bool isCheck;
 
   UserStorageType({
     required this.uid,
     required this.age,
     required this.name,
-    this.isMarried,
-    required this.isCheck,
   });
 }

@@ -20,25 +20,19 @@ class UserStorageTypeAdapter extends TypeAdapter<UserStorageType> {
       uid: fields[0] as int,
       age: fields[1] as int,
       name: fields[2] as String,
-      isMarried: fields[3] as bool?,
-      isCheck: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserStorageType obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
       ..write(obj.age)
       ..writeByte(2)
-      ..write(obj.name)
-      ..writeByte(3)
-      ..write(obj.isMarried)
-      ..writeByte(4)
-      ..write(obj.isCheck);
+      ..write(obj.name);
   }
 
   @override

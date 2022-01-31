@@ -6,8 +6,8 @@ import 'package:hive_demo_app/helper/service_locator.dart';
 import 'package:hive_demo_app/helper/global_context.dart';
 import 'package:hive_demo_app/storage/adapter/user_storage_type.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_demo_app/screens/list_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

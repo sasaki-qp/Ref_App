@@ -1,20 +1,26 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive_demo_app/model/user.dart';
 import 'package:hive_demo_app/riverpod/user_riverpod.dart';
-import 'package:hive_demo_app/storage/adapter/user_storage_type.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ListScreen extends ConsumerWidget {
-  late List<UserStorageType> state;
+class ListScreen extends HookConsumerWidget {
+  late List<User> state;
   late UserStateNotifier notifier;
   @override
-  build(BuildContext context, ScopedReader watch) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      notifier.filterSelectedUsers();
-    });
-    notifier = watch(userRiverpod.notifier);
-    state = watch(userRiverpod);
+  build(BuildContext context, WidgetRef ref) {
+    notifier = ref.watch(userRiverpod.notifier);
+    state = ref.watch(userRiverpod);
+
+    useEffect(() {
+      Future(() async {
+        await Future.delayed(const Duration(seconds: 1));
+        notifier.displayUsers();
+      });
+    }, []);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,8 +42,10 @@ class ListScreen extends ConsumerWidget {
                 ) {
                   return InkWell(
                     onTap: () {
-                      notifier.userSelectHandler(
-                          index: currentIndex, user: state[currentIndex]);
+                      notifier.selectHandler(
+                        index: currentIndex,
+                        user: state[currentIndex],
+                      );
                     },
                     child: ListTile(
                       title: Text(

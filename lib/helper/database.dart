@@ -1,20 +1,15 @@
-import 'package:hive_demo_app/storage/adapter/user_storage_type.dart';
+import 'package:hive_demo_app/model/user.dart';
 
 class Database {
-  List<UserStorageType> users = [];
-
   Database() {
     print("DEBUG: register singleton == Constant ");
+  }
+
+  List<User> createUsers() {
+    List<User> users = [];
     for (var i = 1; i <= 10; i++) {
-      users.add(
-        UserStorageType(
-          uid: i,
-          age: i * 10,
-          name: "test$iさん",
-          isMarried: i % 2 == 0 ? true : false,
-          isCheck: false,
-        ),
-      );
+      users.add(User(uid: i, age: i * 10, name: 'test name: $i'));
     }
+    return users;
   }
 }
