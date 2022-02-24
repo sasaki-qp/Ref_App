@@ -9,6 +9,7 @@ import 'package:hive_demo_app/screens/confirm_screen.dart';
 import 'package:hive_demo_app/screens/list_screen.dart';
 import 'package:hive_demo_app/storage/adapter/user_storage_type.dart';
 import 'package:hive_demo_app/storage/user_storage.dart';
+import 'package:hive_demo_app/extension/extension.dart';
 
 final userRiverpod =
     StateNotifierProvider.autoDispose<UserStateNotifier, List<User>>(
@@ -77,5 +78,9 @@ class UserStateNotifier extends StateNotifier<List<User>> {
       ),
       (_) => false,
     );
+  }
+
+  void createTask() {
+    Task doneTask = "this task is done".filterIsDone();
   }
 }

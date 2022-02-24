@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive_demo_app/enum/enum.dart';
+import 'package:hive_demo_app/extension/extension.dart';
 import 'package:hive_demo_app/model/user.dart';
 import 'package:hive_demo_app/riverpod/user_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,12 +11,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ListScreen extends HookConsumerWidget {
   late List<User> state;
   late UserStateNotifier notifier;
+  UserOpts opts = UserOpts.MASTER;
   @override
   build(BuildContext context, WidgetRef ref) {
     notifier = ref.watch(userRiverpod.notifier);
     state = ref.watch(userRiverpod);
 
     useEffect(() {
+      notifier.createTask();
       Future(() async {
         await Future.delayed(const Duration(seconds: 1));
         notifier.displayUsers();
@@ -24,7 +28,7 @@ class ListScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('hive adapter demo'),
+        title: Text('Current User Role === ${opts.role}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
